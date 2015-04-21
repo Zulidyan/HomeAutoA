@@ -27,6 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="group2.testapp1.MyActivity" />
         </activity>
+        <activity
+            android:name=".Lights"
+            android:label="@string/title_activity_display_message"
+            android:parentActivityName=".Lights" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="group2.testapp1.Lights" />
+        </activity>
     </application>
 
 </manifest>

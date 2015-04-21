@@ -14,12 +14,9 @@ public class ToggleDevice extends Device {
         this.state = state;
     }
 
-    public BluetoothSocket mmSocket[];
+    public BluetoothSocket mmSocket;
 
-    char[] buffer = new char[1];
-
-
-    public ToggleDevice(BluetoothSocket mmSocket[]){
+    public ToggleDevice(BluetoothSocket mmSocket){
         this.mmSocket = mmSocket;
     }
 
@@ -27,7 +24,7 @@ public class ToggleDevice extends Device {
 		// TODO - implement ToggleDevice.setState
 
         state = !state;
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
 	}
 
 }

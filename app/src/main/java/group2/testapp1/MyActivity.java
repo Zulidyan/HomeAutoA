@@ -34,8 +34,8 @@ public class MyActivity extends ActionBarActivity {
     private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
     private BluetoothSocket mmSocket[];
 
-    public BluetoothSocket[] getmmSocket(){
-        return mmSocket;
+    public BluetoothSocket getmmSocket(){
+        return mmSocket[0];
     }
 
 
@@ -135,16 +135,14 @@ public class MyActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when the user clicks the Send button */
-/*    public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+    /** Called when the user clicks the Lights button */
+    public void openLights(View view) {
+        Intent intent = new Intent(this, Lights.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
-
-
-    }*/
+    }
 
     public void startBT(View view){
         if (!mBluetoothAdapter.isEnabled()) {
@@ -227,20 +225,19 @@ public class MyActivity extends ActionBarActivity {
         	ToggleDevice light = new ToggleDevice(getmmSocket());
             char[] buffer = new char[1];
         	switch(view.getId()){
-        	case R.id.Button1: //light on
-        		buffer[0] = '1';
-                light.setState(true);
-                break;
-        	case R.id.Button2: //light off
-        		buffer[0] = '2';
-                light.setState(false);
-                break;
-            case R.id.ToggleButton1:
-                if(light.getState()){buffer[0] = '2';}
-                else {buffer[0] = '1';}
-                light.toggleState();
-                break;
-
+                case R.id.Button1: //light on
+                    buffer[0] = '1';
+                    light.setState(true);
+                    break;
+                case R.id.Button2: //light off
+                    buffer[0] = '2';
+                    light.setState(false);
+                    break;
+                case R.id.ToggleButton1:
+                    if(light.getState()){buffer[0] = '2';}
+                    else {buffer[0] = '1';}
+                    light.toggleState();
+                    break;
         	}
 /*            String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
             mmSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
