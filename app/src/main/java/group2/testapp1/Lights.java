@@ -16,14 +16,6 @@ public class Lights extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         Log.d("", "Inside Lights.class");
-        //create intent
-/*        Intent intent = getIntent();
-        String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);*/
-        //create textView
-        /*TextView textView = new TextView(this);
-        textView.setTextSize(20);
-        textView.setText("test");*/
-        //set the view
         ScrollView sv1 = new ScrollView(this);
         ToggleButton l1 = new ToggleButton(this);
         l1.setText("light1");
