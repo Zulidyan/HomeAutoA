@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -27,8 +28,10 @@ public class Lights extends ActionBarActivity {
         textView.setText("test");*/
         //set the view
         ScrollView sv1 = new ScrollView(this);
+        LinearLayout linear = new LinearLayout(this);
+        linear.setOrientation(LinearLayout.VERTICAL);
         ToggleButton l1 = new ToggleButton(this);
-        //l1.setText("light1");
+        l1.setText("Light 1");
         l1.setTextOff("Light 1 Off");
         l1.setTextOn("Light 1 On");
         l1.setOnClickListener(new View.OnClickListener(){
@@ -36,7 +39,18 @@ public class Lights extends ActionBarActivity {
                 toggleLight(1);
             }
         });
-        sv1.addView(l1);
+        linear.addView(l1);
+        ToggleButton l2 = new ToggleButton(this);
+        l2.setText("Light 2");
+        l2.setTextOff("Light 2 Off");
+        l2.setTextOn("Light 2 On");
+        l2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                toggleLight(2);
+            }
+        });
+        linear.addView(l2);
+        sv1.addView(linear);
         setContentView(sv1);
 
         //setContentView(R.layout.activity_display_message);

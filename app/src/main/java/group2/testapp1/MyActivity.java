@@ -222,7 +222,7 @@ public class MyActivity extends ActionBarActivity {
 /*        BluetoothSocket mmSocket;
         BluetoothDevice mmDevice = btDeviceArray.get(0);*/
         try {
-        	ToggleDevice light = new ToggleDevice(getmmSocket());
+        	ToggleDevice light = new ToggleDevice(getmmSocket(),3);
             char[] buffer = new char[1];
         	switch(view.getId()){
                 case R.id.Button1: //light on
