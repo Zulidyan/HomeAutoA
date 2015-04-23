@@ -31,7 +31,7 @@ public class Lights extends ActionBarActivity {
         LinearLayout linear = new LinearLayout(this);
         linear.setOrientation(LinearLayout.VERTICAL);
         ToggleButton l1 = new ToggleButton(this);
-        l1.setText("Light 1");
+        l1.setText("Light 1"); //setText("Light " + [light id])
         l1.setTextOff("Light 1 Off");
         l1.setTextOn("Light 1 On");
         l1.setOnClickListener(new View.OnClickListener(){
@@ -52,7 +52,6 @@ public class Lights extends ActionBarActivity {
         linear.addView(l2);
         sv1.addView(linear);
         setContentView(sv1);
-
         //setContentView(R.layout.activity_display_message);
     }
     protected void toggleLight(int i){
