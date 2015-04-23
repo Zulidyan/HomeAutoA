@@ -15,9 +15,8 @@ public class ToggleDevice extends Device {
         this.state = state;
     }
 
-    public ToggleDevice(BluetoothSocket mmSocket, int ID){
-        this.mmSocket = mmSocket;
-        this.ID = ID;
+    public ToggleDevice(BluetoothSocket mmSocket, int ID, String name){
+        super(mmSocket,ID, name);
     }
 
     public void toggleState() {
