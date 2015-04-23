@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <!--<EditText
             android:id="@+id/edit_message"
@@ -32,25 +32,25 @@
                 android:text="ToLights"
                 android:onClick="openLights"/>
 
-            <Button
-		android:id="@+id/Button1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/light1on"
-                android:onClick="toggleLight"/>
-            <Button
-		android:id="@+id/Button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/light1off"
-                android:onClick="toggleLight"/>
-            <Switch
-                android:id="@+id/ToggleButton1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textOn="@string/light1on"
-                android:textOff="@string/light1off"
-                android:onClick="toggleLight"/>
+            <!--<Button-->
+		<!--android:id="@+id/Button1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/light1on"-->
+                <!--android:onClick="toggleLight"/>-->
+            <!--<Button-->
+		<!--android:id="@+id/Button2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/light1off"-->
+                <!--android:onClick="toggleLight"/>-->
+            <!--<Switch-->
+                <!--android:id="@+id/ToggleButton1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textOn="@string/light1on"-->
+                <!--android:textOff="@string/light1off"-->
+                <!--android:onClick="toggleLight"/>-->
         </LinearLayout>
 
     </ScrollView>

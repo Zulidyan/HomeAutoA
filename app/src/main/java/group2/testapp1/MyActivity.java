@@ -45,12 +45,11 @@ public class MyActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//        lv = (ListView)findViewById(R.id.listView1);
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
         }
-        if(mBluetoothAdapter.isEnabled()) {
+        /*if(mBluetoothAdapter.isEnabled()) {
             pairedDevices = mBluetoothAdapter.getBondedDevices();
 
             ArrayList tList = new ArrayList();
@@ -58,15 +57,11 @@ public class MyActivity extends ActionBarActivity {
             for (BluetoothDevice bt : pairedDevices) {
                 tList.add(bt.getName());
                 Log.d("","Name of Device: "+bt.getName());
-                if (bt.getName().contains("HC"))
+                if (bt.getName().contains("Light"))
                     Log.d("","Contains HC");
                 tDevice.add(bt);
                 Log.d("","Device name"+bt.getName()+": toString "+bt.toString());
-                //Toast.makeText(getApplicationContext(), bt.getName(), Toast.LENGTH_SHORT).show();
             }
-            //Toast.makeText(getApplicationContext(), "Showing Paired Devices", Toast.LENGTH_SHORT).show();
-//            final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, tList);
-//            lv.setAdapter(adapter);
             btDeviceArray = tDevice;
         }
         tD = new ToggleDevice[btDeviceArray.size()];
@@ -87,36 +82,36 @@ public class MyActivity extends ActionBarActivity {
                     Log.d("","Connected to device "+device);
                 else
                     Log.d("","Failed to connect to device "+device);
-        }
+        }*/
     }
 
-    protected void reconnect(){
-        for (int device = 0; device < btDeviceArray.size(); device++) {
-            BluetoothDevice mmDevice = btDeviceArray.get(device);
-            BluetoothSocket tSocket;
-            try {
-                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-                tSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-                tSocket.connect();
-                mmSocket[device] = tSocket;
-                Log.d("","Connected to device "+device);
-            } catch (Exception e) {
-                Log.d("","Failed to connect to device "+device);
-            }
-        }
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        for (int i = 0; i < btDeviceArray.size(); i++){
-            try{mmSocket[i].close();
-                Log.d("","Closed socket '"+i+"' onPause()");
-            }
-            catch (Exception e){
-                Log.d("", "Failed to close socket "+ i);
-            }
-        }
-    }
+//    protected void reconnect(){
+//        for (int device = 0; device < btDeviceArray.size(); device++) {
+//            BluetoothDevice mmDevice = btDeviceArray.get(device);
+//            BluetoothSocket tSocket;
+//            try {
+//                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
+//                tSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
+//                tSocket.connect();
+//                mmSocket[device] = tSocket;
+//                Log.d("","Connected to device "+device);
+//            } catch (Exception e) {
+//                Log.d("","Failed to connect to device "+device);
+//            }
+//        }
+//    }
+//    @Override
+//    protected void onPause(){
+//        super.onPause();
+//        for (int i = 0; i < btDeviceArray.size(); i++){
+//            try{mmSocket[i].close();
+//                Log.d("","Closed socket '"+i+"' onPause()");
+//            }
+//            catch (Exception e){
+//                Log.d("", "Failed to close socket "+ i);
+//            }
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,9 +133,6 @@ public class MyActivity extends ActionBarActivity {
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
-        if (id == R.id.reconnect){
-            reconnect();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -156,43 +148,43 @@ public class MyActivity extends ActionBarActivity {
 
 
 
-    public void toggleLight(View view){
-        //pairedDevices = mBluetoothAdapter.getBondedDevices();
-/*        BluetoothSocket mmSocket;
-        BluetoothDevice mmDevice = btDeviceArray.get(0);*/
-        try {
-        	char[] buffer = new char[1];
-        	switch(view.getId()){
-                case R.id.Button1: //light on
-                    buffer[0] = '1';
-                    tD[0].setState(true);
-                    break;
-                case R.id.Button2: //light off
-                    buffer[0] = '2';
-                    tD[0].setState(false);
-                    break;
-                case R.id.ToggleButton1:
-                    if(tD[0].getState()){buffer[0] = '2';}
-                    else {buffer[0] = '1';}
-                    tD[0].toggleState();
-                    break;
-        	}
-/*            String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-            mmSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-            mmSocket.connect();*/
-            byte [] buffer2 = new byte[1];
-            //Toast.makeText(getApplicationContext(),String.valueOf(buffer[0]),Toast.LENGTH_SHORT).show();
-            OutputStream mmOutStream = mmSocket[0].getOutputStream();
-            InputStream mmInStream = mmSocket[0].getInputStream();
-            mmOutStream.write(buffer[0]);
-            mmInStream.read(buffer2);
-
-            Log.d(""," Read the following : '"+(char)buffer2[0]+"'");
-/*            mmSocket.close();*/
-        } catch (Exception e) {
-            Log.d("","Failed to toggle light");
-            reconnect();
-            Toast.makeText(getApplicationContext(),"Error: Device not connected",Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void toggleLight(View view){
+//        pairedDevices = mBluetoothAdapter.getBondedDevices();
+//        BluetoothSocket mmSocket;
+//        BluetoothDevice mmDevice = btDeviceArray.get(0);*//*
+//        try {
+//        	char[] buffer = new char[1];
+//        	switch(view.getId()){
+//                case R.id.Button1: //light on
+//                    buffer[0] = '1';
+//                    tD[0].setState(true);
+//                    break;
+//                case R.id.Button2: //light off
+//                    buffer[0] = '2';
+//                    tD[0].setState(false);
+//                    break;
+//                case R.id.ToggleButton1:
+//                    if(tD[0].getState()){buffer[0] = '2';}
+//                    else {buffer[0] = '1';}
+//                    tD[0].toggleState();
+//                    break;
+//        	}
+//            String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
+//            mmSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
+//            mmSocket.connect();*//*
+//            byte [] buffer2 = new byte[1];
+//            Toast.makeText(getApplicationContext(),String.valueOf(buffer[0]),Toast.LENGTH_SHORT).show();
+//            OutputStream mmOutStream = mmSocket[0].getOutputStream();
+//            InputStream mmInStream = mmSocket[0].getInputStream();
+//            mmOutStream.write(buffer[0]);
+//            mmInStream.read(buffer2);
+//
+//            Log.d(""," Read the following : '"+(char)buffer2[0]+"'");
+//            mmSocket.close();*//*
+//        } catch (Exception e) {
+//            Log.d("","Failed to toggle light");
+//            reconnect();
+//            Toast.makeText(getApplicationContext(),"Error: Device not connected",Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
