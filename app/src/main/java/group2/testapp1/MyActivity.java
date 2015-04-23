@@ -28,11 +28,12 @@ import java.util.UUID;
 public class MyActivity extends ActionBarActivity {
 
     public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
-    private ListView lv;
+//    private ListView lv;
     private BluetoothAdapter mBluetoothAdapter;
     private Set<BluetoothDevice> pairedDevices;
     private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
     private BluetoothSocket mmSocket[];
+    private ToggleDevice[] tD;
 
     public BluetoothSocket getmmSocket(){
         return mmSocket[0];
@@ -44,7 +45,7 @@ public class MyActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        lv = (ListView)findViewById(R.id.listView1);
+//        lv = (ListView)findViewById(R.id.listView1);
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
@@ -56,28 +57,36 @@ public class MyActivity extends ActionBarActivity {
             ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
             for (BluetoothDevice bt : pairedDevices) {
                 tList.add(bt.getName());
+                Log.d("","Name of Device: "+bt.getName());
+                if (bt.getName().contains("HC"))
+                    Log.d("","Contains HC");
                 tDevice.add(bt);
                 Log.d("","Device name"+bt.getName()+": toString "+bt.toString());
                 //Toast.makeText(getApplicationContext(), bt.getName(), Toast.LENGTH_SHORT).show();
             }
             //Toast.makeText(getApplicationContext(), "Showing Paired Devices", Toast.LENGTH_SHORT).show();
-            final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, tList);
-            lv.setAdapter(adapter);
+//            final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, tList);
+//            lv.setAdapter(adapter);
             btDeviceArray = tDevice;
         }
+        tD = new ToggleDevice[btDeviceArray.size()];
+
         mBluetoothAdapter.cancelDiscovery();
         Log.d("", "Size of bdDeviceArray = " + btDeviceArray.size());
         mmSocket = new BluetoothSocket[btDeviceArray.size()];
         for (int device = 0; device < btDeviceArray.size(); device++) {
             BluetoothDevice mmDevice = btDeviceArray.get(device);
-                try {
-                    String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-                    mmSocket[device] = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-                    mmSocket[device].connect();
+            //try {
+                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
+            try{
+                mmSocket[device] = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
+            } catch (Exception e) {e.printStackTrace(); Log.d("","Failed to create rfcomm socket");}
+                tD[device] = new ToggleDevice(mmSocket[device], device);
+                if(tD[device].connect() == true)
+                //mmSocket[device].connect();
                     Log.d("","Connected to device "+device);
-                } catch (Exception e) {
+                else
                     Log.d("","Failed to connect to device "+device);
-            }
         }
     }
 
@@ -126,7 +135,8 @@ public class MyActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
         }
         if (id == R.id.reconnect){
             reconnect();
@@ -144,99 +154,27 @@ public class MyActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void startBT(View view){
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, 1);
-            //Toast didn't make sense as it was displaying the same time as the confirmation window
-            //Toast.makeText(getApplicationContext(),"Bluetooth Enabled",Toast.LENGTH_SHORT).show();
-        }
-        else Toast.makeText(getApplicationContext(),"Bluetooth Already Enabled",Toast.LENGTH_SHORT).show();
-    }
-    public void discoverableBT(View view){
-        if (mBluetoothAdapter.isEnabled()) {
-            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);
-            startActivity(discoverableIntent);
-        }
-        //Toast didn't make sense as it was displayed before accepting discoverable
-        //Toast.makeText(getApplicationContext(),"Discoverable for 30 Seconds",Toast.LENGTH_SHORT).show();
-    }
-    public void disableBT(View view){
-        if(mBluetoothAdapter.isEnabled()){
-            mBluetoothAdapter.disable();
-            Toast.makeText(getApplicationContext(),"Bluetooth Disabled",Toast.LENGTH_SHORT).show();
-        }
-        else
-            Toast.makeText(getApplicationContext(),"Bluetooth Already Disabled",Toast.LENGTH_SHORT).show();
-    }
 
-    public void discoverBT(View view){
-        Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
-    }
-    public void listPairedDevices(View view){
-        //Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
-        if(mBluetoothAdapter.isEnabled()) {
-            pairedDevices = mBluetoothAdapter.getBondedDevices();
 
-            ArrayList tList = new ArrayList();
-            ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
-            for (BluetoothDevice bt : pairedDevices) {
-                tList.add(bt.getName());
-                tDevice.add(bt);
-                Toast.makeText(getApplicationContext(), bt.getName(), Toast.LENGTH_SHORT).show();
-            }
-            //Toast.makeText(getApplicationContext(), "Showing Paired Devices", Toast.LENGTH_SHORT).show();
-            final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, tList);
-            lv.setAdapter(adapter);
-            btDeviceArray = tDevice;
-        }
-        else
-            Toast.makeText(getApplicationContext(),"Please Enable Bluetooth First",Toast.LENGTH_SHORT).show();
-    }
-//    public void lightOn(View view){
-//        //pairedDevices = mBluetoothAdapter.getBondedDevices();
-//        try {
-///*            String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-//            mmSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-//            mmSocket.connect();*/
-//            char[] buffer = new char[1];
-//            buffer[0] = '1';
-//            byte [] buffer2 = new byte[1];
-//            //Toast.makeText(getApplicationContext(),String.valueOf(buffer[0]),Toast.LENGTH_SHORT).show();
-//            OutputStream mmOutStream = mmSocket[0].getOutputStream();
-//            InputStream mmInStream = mmSocket[0].getInputStream();
-//            mmOutStream.write(buffer[0]);
-//            mmInStream.read(buffer2);
-//            Log.d("","Read the following : '"+(char)buffer2[0]+"'");
-///*            mmSocket.close();*/
-//        } catch (Exception e) {
-//            Log.d("","Failed to Turn On");
-//            reconnect();
-//            Toast.makeText(getApplicationContext(),"Error: Device not connected",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//    
     public void toggleLight(View view){
         //pairedDevices = mBluetoothAdapter.getBondedDevices();
 /*        BluetoothSocket mmSocket;
         BluetoothDevice mmDevice = btDeviceArray.get(0);*/
         try {
-        	ToggleDevice light = new ToggleDevice(getmmSocket(),3);
-            char[] buffer = new char[1];
+        	char[] buffer = new char[1];
         	switch(view.getId()){
                 case R.id.Button1: //light on
                     buffer[0] = '1';
-                    light.setState(true);
+                    tD[0].setState(true);
                     break;
                 case R.id.Button2: //light off
                     buffer[0] = '2';
-                    light.setState(false);
+                    tD[0].setState(false);
                     break;
                 case R.id.ToggleButton1:
-                    if(light.getState()){buffer[0] = '2';}
+                    if(tD[0].getState()){buffer[0] = '2';}
                     else {buffer[0] = '1';}
-                    light.toggleState();
+                    tD[0].toggleState();
                     break;
         	}
 /*            String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";

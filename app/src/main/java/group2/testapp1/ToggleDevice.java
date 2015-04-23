@@ -5,7 +5,7 @@ import android.bluetooth.BluetoothSocket;
 public class ToggleDevice extends Device {
 
 	private boolean state = false; //default off
-    public BluetoothSocket mmSocket;
+    private BluetoothSocket mmSocket;
     private int ID;
 
 	public boolean getState() {
@@ -19,6 +19,15 @@ public class ToggleDevice extends Device {
         this.mmSocket = mmSocket;
         this.ID = ID;
     }
+    public int getID(){
+        return ID;
+    }
+    public boolean connect(){
+        try{mmSocket.connect();
+            return true;}
+        catch(Exception e) {return false;}
+    }
+
 
     public void toggleState() {
 		// TODO - implement ToggleDevice.setState
