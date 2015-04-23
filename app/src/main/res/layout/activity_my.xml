@@ -31,46 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="ToLights"
                 android:onClick="openLights"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/startBT"
-                android:onClick="startBT"/>
-<!--            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/stuff"/>-->
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/DisableBT"
-                android:onClick="disableBT"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/discoverBT"
-                android:onClick="discoverableBT"/>
-<!--            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/stuff"/>-->
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/FindDevices"
-                android:onClick="discoverBT"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ListDevices"
-                android:onClick="listPairedDevices"/>
-            <ListView
-                android:id="@+id/listView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" >
-            </ListView>
             <Button
 		android:id="@+id/Button1"
                 android:layout_width="match_parent"
