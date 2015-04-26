@@ -97,8 +97,8 @@ public class ThermostatActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();
+    protected void onDestroy(){
+        super.onDestroy();
         for (int i = 0; i < thermDeviceArray.size(); i++){
             try{thermDeviceArray.get(i).disconnect();
                 Log.d("","Closed socket '"+i+"' onPause()");
