@@ -1,28 +1,16 @@
 package group2.testapp1;
 
 import android.bluetooth.*;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.UUID;
 
 
 public class MyActivity extends ActionBarActivity {
@@ -137,9 +125,9 @@ public class MyActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when the user clicks the Lights button */
+    /** Called when the user clicks the LightsActivity button */
     public void openLights(View view) {
-        Intent intent = new Intent(this, Lights.class);
+        Intent intent = new Intent(this, LightsActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
@@ -147,7 +135,7 @@ public class MyActivity extends ActionBarActivity {
     }
 
     public void openThermostat(View view){
-        Intent intent = new Intent(this, Thermostat.class);
+        Intent intent = new Intent(this, ThermostatDevice.class);
         startActivity(intent);
     }
 

@@ -28,12 +28,12 @@
                 android:value="group2.testapp1.MyActivity" />
         </activity>
         <activity
-            android:name=".Lights"
+            android:name=".LightsActivity"
             android:label="@string/title_activity_display_message"
-            android:parentActivityName=".Lights" >
+            android:parentActivityName=".LightsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="group2.testapp1.Lights" />
+                android:value=".LightsActivity" />
         </activity>
         <activity
             android:name=".ThermostatActivity"

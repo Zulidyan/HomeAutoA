@@ -23,14 +23,14 @@ import java.util.UUID;
 
 // Created by Matthew on 4/19/15.
 
-public class Lights extends ActionBarActivity {
+public class LightsActivity extends ActionBarActivity {
 
     private ArrayList<ToggleDevice> tdDeviceArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("", "Inside Lights.onCreate()");
+        Log.d("", "Inside LightsActivity.onCreate()");
 
         BluetoothAdapter mBluetoothAdapter;
         Set<BluetoothDevice> pairedDevices;

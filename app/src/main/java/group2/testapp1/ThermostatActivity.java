@@ -19,18 +19,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.UUID;
-
 
 
 public class ThermostatActivity extends ActionBarActivity {
 
-    private ArrayList<Thermostat> thermDeviceArray = new ArrayList<>();
+    private ArrayList<ThermostatDevice> thermDeviceArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("", "Inside Lights.class");
+        Log.d("", "Inside LightsActivity.class");
 
         BluetoothAdapter mBluetoothAdapter;
         Set<BluetoothDevice> pairedDevices;
@@ -48,7 +46,7 @@ public class ThermostatActivity extends ActionBarActivity {
                 if(bt.getName().contains("Light")){
                     try{
                         Log.d("","Trying to add a new ToggleDevice " + bt.getName());
-                        thermDeviceArray.add(new Thermostat(bt.getName(), id, bt));
+                        thermDeviceArray.add(new ThermostatDevice(bt.getName(), id, bt));
                         Log.d("","Device Added, trying to connect");
                         if(thermDeviceArray.get(id).connect())
                             Log.d("","Device Connected!");
