@@ -41,11 +41,11 @@ public class ThermostatActivity extends ActionBarActivity {
         if(mBluetoothAdapter.isEnabled()) {
             pairedDevices = mBluetoothAdapter.getBondedDevices();
             Log.d("","pairedDevices.size() = " + pairedDevices.size());
-            int id = 0;
+            int id = pairedDevices.size()+1;
             for (BluetoothDevice bt : pairedDevices) {
-                if(bt.getName().contains("Light")){
+                if(bt.getName().contains("Thermostat")){
                     try{
-                        Log.d("","Trying to add a new ToggleDevice " + bt.getName());
+                        Log.d("","Trying to add a new ThermostatDevice " + bt.getName());
                         thermDeviceArray.add(new ThermostatDevice(bt.getName(), id, bt));
                         Log.d("","Device Added, trying to connect");
                         if(thermDeviceArray.get(id).connect())
@@ -54,17 +54,19 @@ public class ThermostatActivity extends ActionBarActivity {
                             Log.d("","Failed to connect to device " + id + " with name " + bt.getName());
                         }
                         ToggleButton button = new ToggleButton(this);
-                        TextView tempDisplay;
-                        button.setText(bt.getName());
-                        button.setId(id);
-                        button.setTextOn(bt.getName()+ " On");
-                        button.setTextOff(bt.getName()+ " Off");
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                getTemperature(v.getId());
-                            }
-                        });
+                        TextView tempDisplay = new TextView(this);
+                        getTemperature(id);
+                        tempDisplay.setText(String.valueOf(thermDeviceArray.get(id).getTemperature()));
+//                        button.setText(bt.getName());
+//                        button.setId(id);
+//                        button.setTextOn(bt.getName()+ " On");
+//                        button.setTextOff(bt.getName()+ " Off");
+//                        button.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                getTemperature(v.getId());
+//                            }
+                        //});
                         linear.addView(button);
                         id++;
                     }catch (Exception e) {e.printStackTrace(); Log.d("","Shit broke making the socket");}
@@ -126,7 +128,7 @@ public class ThermostatActivity extends ActionBarActivity {
     }
 
     protected void getTemperature(int i){
-        Log.d("","Trying to update temperature "+i);
+        Log.d("","Trying to update temperature of id"+i);
         try {
             char[] bufferOut = new char[1];
             bufferOut[0] = '4'; //get temp from arduino
