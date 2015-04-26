@@ -39,17 +39,17 @@ public class ToggleDevice extends Device {
         }
         catch(Exception e) {return false;}
     }
-    protected OutputStream getOS(){
-        try{ return mmSocket.getOutputStream();}
-        catch (Exception e){ e.printStackTrace();}
-        return null;
-    }
-
-    protected InputStream getIS(){
-        try{ return mmSocket.getInputStream();}
-        catch (Exception e){ e.printStackTrace();}
-        return null;
-    }
+//    protected OutputStream getOS(){
+//        try{ return mmSocket.getOutputStream();}
+//        catch (Exception e){ e.printStackTrace();}
+//        return null;
+//    }
+//
+//    protected InputStream getIS(){
+//        try{ return mmSocket.getInputStream();}
+//        catch (Exception e){ e.printStackTrace();}
+//        return null;
+//    }
 
 
 

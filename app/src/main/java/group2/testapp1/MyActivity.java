@@ -27,8 +27,8 @@ import java.util.UUID;
 
 public class MyActivity extends ActionBarActivity {
 
-    public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
-//    private ListView lv;
+    public final static String EXTRA_MESSAGE = "wat";
+//  private ListView lv;
     private BluetoothAdapter mBluetoothAdapter;
     private Set<BluetoothDevice> pairedDevices;
     private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
@@ -143,6 +143,11 @@ public class MyActivity extends ActionBarActivity {
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void openThermostat(View view){
+        Intent intent = new Intent(this, Thermostat.class);
         startActivity(intent);
     }
 

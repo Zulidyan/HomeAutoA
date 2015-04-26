@@ -32,6 +32,12 @@
                 android:text="ToLights"
                 android:onClick="openLights"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To Thermostat"
+                android:onClick="openThermostat"/>
+
             <!--<Button-->
 		<!--android:id="@+id/Button1"-->
                 <!--android:layout_width="match_parent"-->

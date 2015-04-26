@@ -1,7 +1,10 @@
 package group2.testapp1;
 
-import android.bluetooth.BluetoothSocket;
+import android.bluetooth.*;
 import android.util.Log;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public abstract class Device {
 
@@ -45,5 +48,17 @@ public abstract class Device {
         } catch (Exception e) {
             throw new RuntimeException("Failed to disconnect");
         }
+    }
+
+    protected OutputStream getOS(){
+        try{ return mmSocket.getOutputStream();}
+        catch (Exception e){ e.printStackTrace();}
+        return null;
+    }
+
+    protected InputStream getIS(){
+        try{ return mmSocket.getInputStream();}
+        catch (Exception e){ e.printStackTrace();}
+        return null;
     }
 }
