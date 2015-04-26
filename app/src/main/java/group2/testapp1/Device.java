@@ -37,23 +37,26 @@ public abstract class Device {
 	}
 
     public void reconnect(){
+        Log.d("","Trying to reconnect in Device.java");
         try {
             this.mmSocket = device.createInsecureRfcommSocketToServiceRecord(
                     UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
         }
         catch (Exception e){
-            Log.d("","Failed to Connect");
+            Log.d("","Failed to Reconnect in Device.java");
+            throw new RuntimeException("Failed to Reconnect");
         }
     }
 
     public boolean connect(){
         try{Log.d("","Trying to connect inside Device");
             mmSocket.connect();
+            Log.d("","mmSocket.connect() Succeeded");
             return true;
         }
         catch(Exception e) {
             Log.d("", "Failed to Connect inside Device!");
-            throw new RuntimeException("Failed to connect");
+            return false;
         }
     }
 
@@ -61,10 +64,15 @@ public abstract class Device {
         try {
             Log.d("", "Trying to disconnect inside Device");
             mmSocket.close();
+            mmSocket = null;
             return true;
         } catch (Exception e) {
             Log.d("", "Failed to Disconnect inside Device!");
             throw new RuntimeException("Failed to disconnect");
         }
+    }
+    public void debug(){
+        Log.d("","name: " + name + "\ndeviceID: " + deviceID +
+                 "\nmmSocket: " + mmSocket + "\ndevice: "+device);
     }
 }

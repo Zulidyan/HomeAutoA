@@ -30,7 +30,7 @@ public class Lights extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("", "Inside Lights.class");
+        Log.d("", "Inside Lights.onCreate()");
 
         BluetoothAdapter mBluetoothAdapter;
         Set<BluetoothDevice> pairedDevices;
@@ -116,8 +116,8 @@ public class Lights extends ActionBarActivity {
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();
+    protected void onDestroy(){
+        super.onDestroy();
         for (int i = 0; i < tdDeviceArray.size(); i++){
             try{tdDeviceArray.get(i).disconnect();
                 Log.d("","Closed socket '"+i+"' onPause()");
@@ -132,7 +132,7 @@ public class Lights extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_reconnect, menu);
+        inflater.inflate(R.menu.menu_my, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -149,15 +149,10 @@ public class Lights extends ActionBarActivity {
             startActivity(intent);
         }
 
-        if (id == R.id.reconnect){
-            reconnect();
-        }
-
-
         return super.onOptionsItemSelected(item);
     }
 
-      protected void reconnect(){
+/*      protected void reconnect(){
         for (int device = 0; device < tdDeviceArray.size(); device++) {
             Log.d("","Trying to reconnect to lost devices");
             try {
@@ -166,7 +161,10 @@ public class Lights extends ActionBarActivity {
             } catch (Exception e) {
                 Log.d("","Failed to reconnect to device "+device);
             }
+            Log.d("","Object is : " + tdDeviceArray.get(device));
+            tdDeviceArray.get(device).debug();
         }
+
 
 //        for (int device = 0; device < btDeviceArray.size(); device++) {
 //            BluetoothDevice mmDevice = btDeviceArray.get(device);
@@ -181,7 +179,7 @@ public class Lights extends ActionBarActivity {
 //                Log.d("","Failed to connect to device "+device);
 //            }
 //        }
-    }
+    }*/
     protected void toggleLight(int i){
         Log.d("","Trying to turn on/off with ID "+i);
         try {
@@ -203,6 +201,8 @@ public class Lights extends ActionBarActivity {
                 tdDeviceArray.get(i).setState(true);
             else
                 tdDeviceArray.get(i).setState(false);
+
+            Log.d("","Current state is :"+ tdDeviceArray.get(i).getState());
         } catch (Exception e) {
             Log.d("","Failed to toggle light");
             //reconnect();
