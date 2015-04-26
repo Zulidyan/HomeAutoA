@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.UUID;
 
 
 // Created by Matthew on 4/19/15.
@@ -152,34 +151,6 @@ public class LightsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-/*      protected void reconnect(){
-        for (int device = 0; device < tdDeviceArray.size(); device++) {
-            Log.d("","Trying to reconnect to lost devices");
-            try {
-                tdDeviceArray.get(device).reconnect();
-                Log.d("","Reconnected to device "+device);
-            } catch (Exception e) {
-                Log.d("","Failed to reconnect to device "+device);
-            }
-            Log.d("","Object is : " + tdDeviceArray.get(device));
-            tdDeviceArray.get(device).debug();
-        }
-
-
-//        for (int device = 0; device < btDeviceArray.size(); device++) {
-//            BluetoothDevice mmDevice = btDeviceArray.get(device);
-//            BluetoothSocket tSocket;
-//            try {
-//                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-//                tSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-//                tSocket.connect();
-//                mmSocket[device] = tSocket;
-//                Log.d("","Connected to device "+device);
-//            } catch (Exception e) {
-//                Log.d("","Failed to connect to device "+device);
-//            }
-//        }
-    }*/
     protected void toggleLight(int i){
         Log.d("","Trying to turn on/off with ID "+i);
         try {

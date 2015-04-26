@@ -135,7 +135,7 @@ public class MyActivity extends ActionBarActivity {
     }
 
     public void openThermostat(View view){
-        Intent intent = new Intent(this, ThermostatDevice.class);
+        Intent intent = new Intent(this, ThermostatActivity.class);
         startActivity(intent);
     }
 

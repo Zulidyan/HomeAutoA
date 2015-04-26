@@ -15,7 +15,9 @@ public class ThermostatDevice extends Device{ //if thermostat receives a '4', wi
         this.temperature = t;
     }
 
-    public float getTemperature(){
+    public float getTemperatureC(){
         return this.temperature;
     }
+
+    public float getTemperatureF() { return this.temperature * 9 / 5 + 32;}
 }
