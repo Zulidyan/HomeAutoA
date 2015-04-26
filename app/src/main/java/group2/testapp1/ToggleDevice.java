@@ -1,10 +1,7 @@
 package group2.testapp1;
 
-import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothDevice;
 import android.util.Log;
-
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ToggleDevice extends Device {
 
@@ -18,8 +15,8 @@ public class ToggleDevice extends Device {
     }
     public int getId(){return super.getID();}
 
-    public ToggleDevice(String name, int id, BluetoothSocket sock){
-        super(name, id, sock);
+    public ToggleDevice(String name, int id, BluetoothDevice device){
+        super(name, id, device);
         this.state = false;
     }
 

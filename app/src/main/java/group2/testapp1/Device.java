@@ -4,6 +4,8 @@ import android.bluetooth.BluetoothSocket;
 import android.bluetooth.*;
 import android.util.Log;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 public abstract class Device {
@@ -36,16 +38,6 @@ public abstract class Device {
 		return deviceID;
 	}
 
-    public void reconnect(){
-        try {
-            this.mmSocket = device.createInsecureRfcommSocketToServiceRecord(
-                    UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-        }
-        catch (Exception e){
-            Log.d("","Failed to Connect");
-        }
-    }
-
     public boolean connect(){
         try{Log.d("","Trying to connect inside Device");
             mmSocket.connect();
@@ -67,4 +59,17 @@ public abstract class Device {
             throw new RuntimeException("Failed to disconnect");
         }
     }
+
+    protected OutputStream getOS(){
+        try{ return mmSocket.getOutputStream();}
+        catch (Exception e){ e.printStackTrace();}
+        return null;
+    }
+
+    protected InputStream getIS(){
+        try{ return mmSocket.getInputStream();}
+        catch (Exception e){ e.printStackTrace();}
+        return null;
+    }
+
 }

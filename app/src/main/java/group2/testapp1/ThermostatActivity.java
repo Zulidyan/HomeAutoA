@@ -48,9 +48,7 @@ public class ThermostatActivity extends ActionBarActivity {
                 if(bt.getName().contains("Light")){
                     try{
                         Log.d("","Trying to add a new ToggleDevice " + bt.getName());
-                        thermDeviceArray.add(new Thermostat(bt.getName(), id,
-                                bt.createInsecureRfcommSocketToServiceRecord(
-                                        UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))));
+                        thermDeviceArray.add(new Thermostat(bt.getName(), id, bt));
                         Log.d("","Device Added, trying to connect");
                         if(thermDeviceArray.get(id).connect())
                             Log.d("","Device Connected!");
@@ -110,7 +108,7 @@ public class ThermostatActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_reconnect, menu);
+        inflater.inflate(R.menu.menu_my, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -126,27 +124,9 @@ public class ThermostatActivity extends ActionBarActivity {
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
         }
-
-        if (id == R.id.reconnect){
-            reconnect();
-        }
-
-
         return super.onOptionsItemSelected(item);
     }
 
-    protected void reconnect(){
-        for (int device = 0; device < thermDeviceArray.size(); device++) {
-            //TODO Figure out why this isn't working properly
-            Log.d("","Trying to reconnect to lost devices");
-            try {
-                thermDeviceArray.get(device).connect();
-                Log.d("","Reconnected to device "+device);
-            } catch (Exception e) {
-                Log.d("","Failed to reconnect to device "+device);
-            }
-        }
-    }
     protected void getTemperature(int i){
         Log.d("","Trying to update temperature "+i);
         try {
@@ -164,7 +144,6 @@ public class ThermostatActivity extends ActionBarActivity {
             thermDeviceArray.get(i).setTemperature((float)bufferIn[0]);
         } catch (Exception e) {
             Log.d("","Failed to get temperature");
-            //reconnect();
         }
     }
 

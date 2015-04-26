@@ -1,5 +1,6 @@
 package group2.testapp1;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
@@ -13,8 +14,8 @@ public class Thermostat extends Device{ //if thermostat receives a '4', will sen
     float temperature = 0;
 
     //constructor
-    public Thermostat(String name, int id, BluetoothSocket sock){
-        super(name, id, sock);
+    public Thermostat(String name, int id, BluetoothDevice device){
+        super(name, id, device);
     }
 
     public void setTemperature(float t){
