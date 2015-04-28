@@ -2,7 +2,6 @@ package group2.testapp1;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,11 +14,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class Settings extends ActionBarActivity {
-
     private BluetoothAdapter mBluetoothAdapter;
-    private Set<BluetoothDevice> pairedDevices;
-    private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
-    private BluetoothSocket mmSocket[];
+//    private Set<BluetoothDevice> pairedDevices;
+//    private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
+//    private BluetoothSocket mmSocket[];
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -58,22 +56,25 @@ public class Settings extends ActionBarActivity {
         Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
     }
     public void listPairedDevices(View view){
-         ListView lv = (ListView)findViewById(R.id.listView1);
+        ListView lv = (ListView)findViewById(R.id.listView1);
+
+
         //Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
         if(mBluetoothAdapter.isEnabled()) {
-            pairedDevices = mBluetoothAdapter.getBondedDevices();
-
+            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
             ArrayList tList = new ArrayList();
-            ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
+            //ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
             for (BluetoothDevice bt : pairedDevices) {
+
                 tList.add(bt.getName());
-                tDevice.add(bt);
-                Toast.makeText(getApplicationContext(), bt.getName(), Toast.LENGTH_SHORT).show();
+                //tDevice.add(bt);
+                //Toast.makeText(getApplicationContext(), bt.getName(), Toast.LENGTH_SHORT).show();
             }
             //Toast.makeText(getApplicationContext(), "Showing Paired Devices", Toast.LENGTH_SHORT).show();
+            @SuppressWarnings("unchecked")
             final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, tList);
             lv.setAdapter(adapter);
-            btDeviceArray = tDevice;
+            //btDeviceArray = tDevice;
         }
         else
             Toast.makeText(getApplicationContext(),"Please Enable Bluetooth First",Toast.LENGTH_SHORT).show();

@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+<!--        <activity
             android:screenOrientation="portrait"
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
@@ -30,11 +30,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="group2.testapp1.MyActivity" />
-        </activity>
+        </activity>-->
         <activity
             android:screenOrientation="portrait"
             android:name=".LightsActivity"
-            android:label="@string/title_activity_display_message"
+            android:label="@string/title_light_display_message"
             android:parentActivityName=".LightsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,7 +43,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ThermostatActivity"
-            android:label="@string/title_activity_display_message"
+            android:label="@string/title_thermostat_display_message"
             android:parentActivityName=".ThermostatActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,7 +52,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".Settings"
-            android:label="@string/title_activity_display_message"
+            android:label="@string/title_settings_display_message"
             android:parentActivityName=".Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

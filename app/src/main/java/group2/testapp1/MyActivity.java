@@ -9,23 +9,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.Set;
+//import java.util.ArrayList;
+//import java.util.Set;
 
 
 public class MyActivity extends ActionBarActivity {
 
-    public final static String EXTRA_MESSAGE = "wat";
-//  private ListView lv;
-    private BluetoothAdapter mBluetoothAdapter;
-    private Set<BluetoothDevice> pairedDevices;
-    private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
-    private BluetoothSocket mmSocket[];
-    private ToggleDevice[] tD;
 
-    public BluetoothSocket getmmSocket(){
-        return mmSocket[0];
-    }
+    private BluetoothAdapter mBluetoothAdapter;
+//    public final static String EXTRA_MESSAGE = "wat";
+//    private ListView lv;
+//    private Set<BluetoothDevice> pairedDevices;
+//    private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
+//    private BluetoothSocket mmSocket[];
+//    private ToggleDevice[] tD;
+//
+//    public BluetoothSocket getmmSocket(){
+//        return mmSocket[0];
+//    }
 
 
     @Override
@@ -37,40 +38,40 @@ public class MyActivity extends ActionBarActivity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
         }
-        /*if(mBluetoothAdapter.isEnabled()) {
-            pairedDevices = mBluetoothAdapter.getBondedDevices();
-
-            ArrayList tList = new ArrayList();
-            ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
-            for (BluetoothDevice bt : pairedDevices) {
-                tList.add(bt.getName());
-                Log.d("","Name of Device: "+bt.getName());
-                if (bt.getName().contains("Light"))
-                    Log.d("","Contains HC");
-                tDevice.add(bt);
-                Log.d("","Device name"+bt.getName()+": toString "+bt.toString());
-            }
-            btDeviceArray = tDevice;
-        }
-        tD = new ToggleDevice[btDeviceArray.size()];
-
-        mBluetoothAdapter.cancelDiscovery();
-        Log.d("", "Size of bdDeviceArray = " + btDeviceArray.size());
-        mmSocket = new BluetoothSocket[btDeviceArray.size()];
-        for (int device = 0; device < btDeviceArray.size(); device++) {
-            BluetoothDevice mmDevice = btDeviceArray.get(device);
-            //try {
-                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-            try{
-                mmSocket[device] = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-            } catch (Exception e) {e.printStackTrace(); Log.d("","Failed to create rfcomm socket");}
-                tD[device] = new ToggleDevice(mmSocket[device], device);
-                if(tD[device].connect() == true)
-                //mmSocket[device].connect();
-                    Log.d("","Connected to device "+device);
-                else
-                    Log.d("","Failed to connect to device "+device);
-        }*/
+//        if(mBluetoothAdapter.isEnabled()) {
+//            pairedDevices = mBluetoothAdapter.getBondedDevices();
+//
+//            ArrayList tList = new ArrayList();
+//            ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
+//            for (BluetoothDevice bt : pairedDevices) {
+//                tList.add(bt.getName());
+//                Log.d("","Name of Device: "+bt.getName());
+//                if (bt.getName().contains("Light"))
+//                    Log.d("","Contains HC");
+//                tDevice.add(bt);
+//                Log.d("","Device name"+bt.getName()+": toString "+bt.toString());
+//            }
+//            btDeviceArray = tDevice;
+//        }
+//        tD = new ToggleDevice[btDeviceArray.size()];
+//
+//        mBluetoothAdapter.cancelDiscovery();
+//        Log.d("", "Size of bdDeviceArray = " + btDeviceArray.size());
+//        mmSocket = new BluetoothSocket[btDeviceArray.size()];
+//        for (int device = 0; device < btDeviceArray.size(); device++) {
+//            BluetoothDevice mmDevice = btDeviceArray.get(device);
+//            //try {
+//                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
+//            try{
+//                mmSocket[device] = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
+//            } catch (Exception e) {e.printStackTrace(); Log.d("","Failed to create rfcomm socket");}
+//                tD[device] = new ToggleDevice(mmSocket[device], device);
+//                if(tD[device].connect() == true)
+//                //mmSocket[device].connect();
+//                    Log.d("","Connected to device "+device);
+//                else
+//                    Log.d("","Failed to connect to device "+device);
+//        }
     }
 
 //    protected void reconnect(){
@@ -138,9 +139,6 @@ public class MyActivity extends ActionBarActivity {
         Intent intent = new Intent(this, ThermostatActivity.class);
         startActivity(intent);
     }
-
-
-
 //    public void toggleLight(View view){
 //        pairedDevices = mBluetoothAdapter.getBondedDevices();
 //        BluetoothSocket mmSocket;

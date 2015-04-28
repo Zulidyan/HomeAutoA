@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,7 +42,7 @@ public class ThermostatActivity extends ActionBarActivity {
             Log.d("","pairedDevices.size() = " + pairedDevices.size());
             int id = 0;
             for (BluetoothDevice bt : pairedDevices) {
-                if(bt.getName().contains("Light")){
+                if(bt.getName().contains("LightA")){
                     try{
                         Log.d("","Trying to add a new ThermostatDevice " + bt.getName());
                         thermDeviceArray.add(new ThermostatDevice(bt.getName(), id, bt));
@@ -101,10 +100,10 @@ public class ThermostatActivity extends ActionBarActivity {
         super.onDestroy();
         for (int i = 0; i < thermDeviceArray.size(); i++){
             try{thermDeviceArray.get(i).disconnect();
-                Log.d("","Closed socket '"+i+"' onPause()");
+                Log.d("","Closed socket '"+i+"' onDestroy()");
             }
             catch (Exception e){
-                Log.d("", "Failed to close socket "+ i);
+                Log.d("", "Failed to close socket "+ i +" onDestroy()");
             }
         }
     }

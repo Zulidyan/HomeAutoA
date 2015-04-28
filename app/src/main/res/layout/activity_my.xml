@@ -7,9 +7,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MyActivity">-->
-    <ScrollView
+<!--    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,13 +29,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ToLights"
+                android:text="@string/toLights"
                 android:onClick="openLights"/>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="To Thermostat"
+                android:text="@string/toThermostat"
                 android:onClick="openThermostat"/>
 
             <!--<Button-->
@@ -59,7 +59,7 @@
                 <!--android:onClick="toggleLight"/>-->
         </LinearLayout>
 
-    </ScrollView>
+<!--    </ScrollView>-->
 
 </RelativeLayout>
 
