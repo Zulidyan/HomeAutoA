@@ -9,10 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -52,7 +52,7 @@ public class ThermostatActivity extends ActionBarActivity {
                         else{
                             Log.d("","Failed to connect to device " + id + " with name " + bt.getName());
                         }
-                        ToggleButton button = new ToggleButton(this);
+                        Button button = new Button(this);
                         TextView tempDisplay = new TextView(this);
                         getTemperature(id);
                         tempDisplay.setText(bt.getName() + ": " +

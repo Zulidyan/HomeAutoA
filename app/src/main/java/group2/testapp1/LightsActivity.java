@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import java.io.InputStream;
@@ -45,34 +46,64 @@ public class LightsActivity extends ActionBarActivity {
             int id = 0;
             for (BluetoothDevice bt : pairedDevices) {
                 if(bt.getName().contains("Light")){
-                    try{
-                        Log.d("","Trying to add a new ToggleDevice " + bt.getName());
+                    try {
+                        Log.d("", "Trying to add a new ToggleDevice " + bt.getName());
                         tdDeviceArray.add(new ToggleDevice(bt.getName(), id, bt));
 //                        tdDeviceArray.add(new ToggleDevice(bt.getName(), id,
 //                                bt.createInsecureRfcommSocketToServiceRecord(
 //                                        UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))));
-                        Log.d("","Device Added, trying to connect");
-                        if(tdDeviceArray.get(id).connect())
-                            Log.d("","Device Connected!");
-                        else{
-                            Log.d("","Failed to connect to device " + id + " with name " + bt.getName());
+                        Log.d("", "Device Added, trying to connect");
+                        if (tdDeviceArray.get(id).connect()) {
+                            Log.d("", "Device Connected!");
                         }
+                        else {
+                            Log.d("", "Failed to connect to device " + id + " with name " + bt.getName());
+                        }
+
                         ToggleButton button = new ToggleButton(this);
                         button.setText(bt.getName());
                         button.setId(id);
-                        button.setTextOn(bt.getName()+ " On");
-                        button.setTextOff(bt.getName()+ " Off");
+                        button.setTextOn(bt.getName() + " On");
+                        button.setTextOff(bt.getName() + " Off");
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 toggleLight(v.getId());
                             }
                         });
+
+//                        char[] bufOut = new char[1];
+//                        bufOut[0] = '3';
+//                        byte[] bufIn = new byte[1];
+//                        OutputStream mmOutStream = tdDeviceArray.get(id).getOS();
+//                        InputStream mmInStream = tdDeviceArray.get(id).getIS();
+//                        mmOutStream.write(bufOut[0]);
+//                        int numBytesRead = mmInStream.read(bufIn);
+//                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
+//                                + numBytesRead + " bytes while initializing.");
+//                        numBytesRead = mmInStream.read(bufIn);
+//                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
+//                                + numBytesRead + " bytes while initializing.");
+//
+//                        if (bufIn[0] == '1'){
+//                            tdDeviceArray.get(id).setState(true);
+//                            button.setChecked(true);
+//                        }
+//                        else if (bufIn[0] == '0') {
+//                            tdDeviceArray.get(id).setState(false);
+//                            button.setChecked(false);
+//                        }
                         linear.addView(button);
                         id++;
                     }catch (Exception e) {e.printStackTrace(); Log.d("","Shit broke making the socket");}
 
                 }
+            }
+            if (id == 0){
+                TextView error = new TextView(this);
+                error.setText("No devices found");
+                error.setTextSize(24);
+                linear.addView(error);
             }
         }
 
@@ -160,7 +191,7 @@ public class LightsActivity extends ActionBarActivity {
             else
                     bufferOut[0] = '1'; //if no, prepare to send on signal
             byte [] bufferIn = new byte[1];
-
+            Log.d(""," Sending the following : '"+bufferOut[0]+"'");
             OutputStream mmOutStream = tdDeviceArray.get(i).getOS();
             InputStream mmInStream = tdDeviceArray.get(i).getIS();
             mmOutStream.write(bufferOut[0]);
