@@ -66,8 +66,6 @@ public class ThermostatActivity extends ActionBarActivity {
                         tempDisplay.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                         tempDisplay.setTextSize(24);
 
-//                        button.setTextOn(bt.getName()+ " On");
-//                        button.setTextOff(bt.getName()+ " Off");
                         refreshButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
