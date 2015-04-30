@@ -38,69 +38,8 @@ public class MyActivity extends ActionBarActivity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
         }
-//        if(mBluetoothAdapter.isEnabled()) {
-//            pairedDevices = mBluetoothAdapter.getBondedDevices();
-//
-//            ArrayList tList = new ArrayList();
-//            ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
-//            for (BluetoothDevice bt : pairedDevices) {
-//                tList.add(bt.getName());
-//                Log.d("","Name of Device: "+bt.getName());
-//                if (bt.getName().contains("Light"))
-//                    Log.d("","Contains HC");
-//                tDevice.add(bt);
-//                Log.d("","Device name"+bt.getName()+": toString "+bt.toString());
-//            }
-//            btDeviceArray = tDevice;
-//        }
-//        tD = new ToggleDevice[btDeviceArray.size()];
-//
-//        mBluetoothAdapter.cancelDiscovery();
-//        Log.d("", "Size of bdDeviceArray = " + btDeviceArray.size());
-//        mmSocket = new BluetoothSocket[btDeviceArray.size()];
-//        for (int device = 0; device < btDeviceArray.size(); device++) {
-//            BluetoothDevice mmDevice = btDeviceArray.get(device);
-//            //try {
-//                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-//            try{
-//                mmSocket[device] = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-//            } catch (Exception e) {e.printStackTrace(); Log.d("","Failed to create rfcomm socket");}
-//                tD[device] = new ToggleDevice(mmSocket[device], device);
-//                if(tD[device].connect() == true)
-//                //mmSocket[device].connect();
-//                    Log.d("","Connected to device "+device);
-//                else
-//                    Log.d("","Failed to connect to device "+device);
-//        }
     }
 
-//    protected void reconnect(){
-//        for (int device = 0; device < btDeviceArray.size(); device++) {
-//            BluetoothDevice mmDevice = btDeviceArray.get(device);
-//            BluetoothSocket tSocket;
-//            try {
-//                String mmUUID = "00001101-0000-1000-8000-00805F9B34FB";
-//                tSocket = mmDevice.createInsecureRfcommSocketToServiceRecord(UUID.fromString(mmUUID));
-//                tSocket.connect();
-//                mmSocket[device] = tSocket;
-//                Log.d("","Connected to device "+device);
-//            } catch (Exception e) {
-//                Log.d("","Failed to connect to device "+device);
-//            }
-//        }
-//    }
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        for (int i = 0; i < btDeviceArray.size(); i++){
-//            try{mmSocket[i].close();
-//                Log.d("","Closed socket '"+i+"' onPause()");
-//            }
-//            catch (Exception e){
-//                Log.d("", "Failed to close socket "+ i);
-//            }
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
