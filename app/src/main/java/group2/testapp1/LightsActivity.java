@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.InputStream;
@@ -60,7 +61,7 @@ public class LightsActivity extends ActionBarActivity {
                             Log.d("", "Failed to connect to device " + id + " with name " + bt.getName());
                         }
 
-                        ToggleButton button = new ToggleButton(this);
+                        final ToggleButton button = new ToggleButton(this);
                         button.setText(bt.getName());
                         button.setId(id);
                         button.setTextOn(bt.getName() + " On");
@@ -68,7 +69,7 @@ public class LightsActivity extends ActionBarActivity {
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                toggleLight(v.getId());
+                                toggleLight(v.getId(), button);
                             }
                         });
 
@@ -153,7 +154,7 @@ public class LightsActivity extends ActionBarActivity {
         super.onDestroy();
         for (int i = 0; i < tdDeviceArray.size(); i++){
             try{tdDeviceArray.get(i).disconnect();
-                Log.d("","Closed socket '"+i+"' onPause()");
+                Log.d("","Closed socket '"+i+"' onDestroy()");
             }
             catch (Exception e){
                 Log.d("", "Failed to close socket "+ i);
@@ -185,7 +186,7 @@ public class LightsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void toggleLight(int i){
+    protected void toggleLight(int i, ToggleButton b){
         Log.d("","Trying to turn on/off with ID "+i);
         try {
             char[] bufferOut = new char[1];
@@ -210,6 +211,9 @@ public class LightsActivity extends ActionBarActivity {
             Log.d("","Current state is :"+ tdDeviceArray.get(i).getState());
         } catch (Exception e) {
             Log.d("","Failed to toggle light");
+            b.setChecked(tdDeviceArray.get(i).getState());
+            Toast.makeText(getApplicationContext(), "Failed To Toggle " +
+                    tdDeviceArray.get(i).getName(), Toast.LENGTH_SHORT).show();
             //reconnect();
         }
     }
