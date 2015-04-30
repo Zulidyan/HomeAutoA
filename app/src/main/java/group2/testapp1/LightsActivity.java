@@ -185,10 +185,6 @@ public class LightsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Toggle the state of the light
-     * @param i The id of the ToggleDevice
-     */
     protected void toggleLight(int i){
         Log.d("","Trying to turn on/off with ID "+i);
         try {

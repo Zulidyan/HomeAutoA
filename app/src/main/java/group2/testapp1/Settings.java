@@ -52,9 +52,9 @@ public class Settings extends ActionBarActivity {
             Toast.makeText(getApplicationContext(),"Bluetooth Already Disabled",Toast.LENGTH_SHORT).show();
     }
 
-    public void discoverBT(View view){
-        Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
-    }
+//    public void discoverBT(View view){
+//        Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
+//    }
     public void listPairedDevices(View view){
         ListView lv = (ListView)findViewById(R.id.listView1);
 
@@ -64,6 +64,7 @@ public class Settings extends ActionBarActivity {
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
             ArrayList tList = new ArrayList();
             //ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
+
             for (BluetoothDevice bt : pairedDevices) {
 
                 tList.add(bt.getName());

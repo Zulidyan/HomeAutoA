@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +43,7 @@ public class ThermostatActivity extends ActionBarActivity {
             Log.d("","pairedDevices.size() = " + pairedDevices.size());
             int id = 0;
             for (BluetoothDevice bt : pairedDevices) {
-                if(bt.getName().contains("Light")){
+                if(bt.getName().contains("LightA")){
                     try{
                         Log.d("","Trying to add a new ThermostatDevice " + bt.getName());
                         thermDeviceArray.add(new ThermostatDevice(bt.getName(), id, bt));
@@ -59,21 +58,21 @@ public class ThermostatActivity extends ActionBarActivity {
                         refreshButton.setText("Refresh");
                         refreshButton.setId(id);
                         updateTemperature(id);
-                        final String name = bt.getName();
-                        tempDisplay.setText(bt.getName() + ": " +
+                        tempDisplay.setText(bt.getName() + "\n" +
                                 String.valueOf(thermDeviceArray.get(id).getTemperatureC())
-                                + " Degrees Celsius | "
+                                + " Degrees Celsius\n"
                                 + String.valueOf(thermDeviceArray.get(id).getTemperatureF())
                                 + " Degrees Fahrenheit");
+                        tempDisplay.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                         tempDisplay.setTextSize(24);
 
                         refreshButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 updateTemperature(v.getId());
-                                tempDisplay.setText(name + ": " +
+                                tempDisplay.setText(thermDeviceArray.get(v.getId()).getName() + "\n" +
                                         String.valueOf(thermDeviceArray.get(v.getId()).getTemperatureC())
-                                        + " Degrees Celsius | "
+                                        + " Degrees Celsius\n"
                                         + String.valueOf(thermDeviceArray.get(v.getId()).getTemperatureF())
                                         + " Degrees Fahrenheit");
                                 //updateTemperature(id);
@@ -82,9 +81,18 @@ public class ThermostatActivity extends ActionBarActivity {
                         linear.addView(tempDisplay);
                         linear.addView(refreshButton);
                         id++;
-                    }catch (Exception e) {e.printStackTrace(); Log.d("","Something broke making the socket");}
+                    }catch (Exception e) {
+                        Log.d("", "Failed to connect to device " + id + " with name " + bt.getName());
+                        thermDeviceArray.remove(id);
+                    }
 
                 }
+            }
+            if (id == 0){
+                TextView error = new TextView(this);
+                error.setText("No devices found");
+                error.setTextSize(24);
+                linear.addView(error);
             }
         }
           //linear.addView(l1);
@@ -109,7 +117,7 @@ public class ThermostatActivity extends ActionBarActivity {
         super.onDestroy();
         for (int i = 0; i < thermDeviceArray.size(); i++){
             try{thermDeviceArray.get(i).disconnect();
-                Log.d("","Closed socket '"+i+"' onPause()");
+                Log.d("","Closed socket '"+i+"' onDestroy()");
             }
             catch (Exception e){
                 Log.d("", "Failed to close socket "+ i);
@@ -149,20 +157,21 @@ public class ThermostatActivity extends ActionBarActivity {
         try {
             char[] bufferOut = new char[1];
             bufferOut[0] = '4'; //get temp from arduino
-            byte [] bufferIn = new byte[5];
+            byte [] bufferIn1 = new byte[1];
+            byte [] bufferIn2 = new byte[5];
 
             OutputStream mmOutStream = thermDeviceArray.get(i).getOS();
             InputStream mmInStream = thermDeviceArray.get(i).getIS();
             mmOutStream.write(bufferOut[0]);
-            int numBytesRead = mmInStream.read(bufferIn);
-            Log.d(""," Read the following : '"+(char)bufferIn[0]+"' and read a total of " + numBytesRead + " bytes.");
-            numBytesRead = mmInStream.read(bufferIn);
+            int numBytesRead = mmInStream.read(bufferIn1);
+            Log.d(""," Read the following : '"+(char)bufferIn1[0]+"' and read a total of " + numBytesRead + " bytes.");
+            numBytesRead = mmInStream.read(bufferIn2);
             Log.d(""," Read a total of " + numBytesRead + " bytes.");
-            Log.d("",bufferIn[0] + " " + bufferIn[1] + " " + bufferIn[2] + " " +
-                     bufferIn[3] + " " + bufferIn[4]);
+            Log.d("",bufferIn2[0] + " " + bufferIn2[1] + " " + bufferIn2[2] + " " +
+                     bufferIn2[3] + " " + bufferIn2[4]);
             String temp = "";
             for (int j = 0; j < 5; j++){
-                temp = temp + (char)bufferIn[j];
+                temp = temp + (char)bufferIn2[j];
             }
             Log.d("","String value : "+ temp);
             thermDeviceArray.get(i).setTemperature(Float.valueOf(temp));
