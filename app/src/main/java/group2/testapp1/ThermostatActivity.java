@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -53,33 +54,42 @@ public class ThermostatActivity extends ActionBarActivity {
                         else{
                             Log.d("","Failed to connect to device " + id + " with name " + bt.getName());
                         }
-                        ToggleButton button = new ToggleButton(this);
-                        TextView tempDisplay = new TextView(this);
-                        getTemperature(id);
+                        Button refreshButton = new Button(this);
+                        final TextView tempDisplay = new TextView(this);
+                        refreshButton.setText("Refresh");
+                        refreshButton.setId(id);
+                        updateTemperature(id);
+                        final String name = bt.getName();
                         tempDisplay.setText(bt.getName() + ": " +
                                 String.valueOf(thermDeviceArray.get(id).getTemperatureC())
                                 + " Degrees Celsius | "
                                 + String.valueOf(thermDeviceArray.get(id).getTemperatureF())
                                 + " Degrees Fahrenheit");
                         tempDisplay.setTextSize(24);
-//                        button.setText(bt.getName());
-//                        button.setId(id);
+
 //                        button.setTextOn(bt.getName()+ " On");
 //                        button.setTextOff(bt.getName()+ " Off");
-//                        button.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                getTemperature(v.getId());
-//                            }
-                        //});
+                        refreshButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                updateTemperature(v.getId());
+                                tempDisplay.setText(name + ": " +
+                                        String.valueOf(thermDeviceArray.get(v.getId()).getTemperatureC())
+                                        + " Degrees Celsius | "
+                                        + String.valueOf(thermDeviceArray.get(v.getId()).getTemperatureF())
+                                        + " Degrees Fahrenheit");
+                                //updateTemperature(id);
+                            }
+                        });
                         linear.addView(tempDisplay);
+                        linear.addView(refreshButton);
                         id++;
-                    }catch (Exception e) {e.printStackTrace(); Log.d("","Shit broke making the socket");}
+                    }catch (Exception e) {e.printStackTrace(); Log.d("","Something broke making the socket");}
 
                 }
             }
         }
-//        linear.addView(l1);
+          //linear.addView(l1);
 //        ToggleButton l2 = new ToggleButton(this);
 //        l2.setText("Light 2");
 //        l2.setTextOff("Light 2 Off");
@@ -132,7 +142,7 @@ public class ThermostatActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void getTemperature(int i){
+    protected void updateTemperature(int i){
         Log.d("","Trying to update temperature of id"+i);
         try {
             char[] bufferOut = new char[1];
