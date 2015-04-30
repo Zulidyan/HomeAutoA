@@ -1,7 +1,6 @@
 package group2.testapp1;
 
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 public class ToggleDevice extends Device {
 
