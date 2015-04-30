@@ -72,30 +72,33 @@ public class LightsActivity extends ActionBarActivity {
                             }
                         });
 
-//                        char[] bufOut = new char[1];
-//                        bufOut[0] = '3';
-//                        byte[] bufIn = new byte[1];
-//                        OutputStream mmOutStream = tdDeviceArray.get(id).getOS();
-//                        InputStream mmInStream = tdDeviceArray.get(id).getIS();
-//                        mmOutStream.write(bufOut[0]);
-//                        int numBytesRead = mmInStream.read(bufIn);
-//                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
-//                                + numBytesRead + " bytes while initializing.");
-//                        numBytesRead = mmInStream.read(bufIn);
-//                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
-//                                + numBytesRead + " bytes while initializing.");
-//
-//                        if (bufIn[0] == '1'){
-//                            tdDeviceArray.get(id).setState(true);
-//                            button.setChecked(true);
-//                        }
-//                        else if (bufIn[0] == '0') {
-//                            tdDeviceArray.get(id).setState(false);
-//                            button.setChecked(false);
-//                        }
+                        char[] bufOut = new char[1];
+                        bufOut[0] = '3';
+                        byte[] bufIn = new byte[1];
+                        OutputStream mmOutStream = tdDeviceArray.get(id).getOS();
+                        InputStream mmInStream = tdDeviceArray.get(id).getIS();
+                        mmOutStream.write(bufOut[0]);
+                        int numBytesRead = mmInStream.read(bufIn);
+                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
+                                + numBytesRead + " bytes while initializing.");
+                        numBytesRead = mmInStream.read(bufIn);
+                        Log.d("", " Read the following : '" + (char) bufIn[0] + "' and read a total of "
+                                + numBytesRead + " bytes while initializing.");
+
+                        if (bufIn[0] == '1'){
+                            tdDeviceArray.get(id).setState(true);
+                            button.setChecked(true);
+                        }
+                        else if (bufIn[0] == '0') {
+                            tdDeviceArray.get(id).setState(false);
+                            button.setChecked(false);
+                        }
                         linear.addView(button);
                         id++;
-                    }catch (Exception e) {e.printStackTrace(); Log.d("","Shit broke making the socket");}
+                    }catch (Exception e) {
+                        Log.d("", "Failed to connect to device " + id + " with name " + bt.getName());
+                        tdDeviceArray.remove(id);
+                    }
 
                 }
             }
