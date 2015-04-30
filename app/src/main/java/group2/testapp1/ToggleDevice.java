@@ -3,6 +3,10 @@ package group2.testapp1;
 import android.bluetooth.BluetoothDevice;
 import android.util.Log;
 
+/**
+ * ToggleDevice is a type of Device that simply holds a boolean state and can represent lights
+ * turning on and off, a door locking and unlocking etc.
+ */
 public class ToggleDevice extends Device {
 
 	private boolean state;

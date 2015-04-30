@@ -8,6 +8,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+/**
+ * Device is an abstract class that represents one particular model such as a light or thermostat.
+ * Each Device has a name, id, and BluetoothSocket.
+ */
 public abstract class Device {
 
 	private String name;
@@ -60,12 +64,20 @@ public abstract class Device {
         }
     }
 
+    /**
+     * Get the OutputStream for writing bytes to the Arduino.
+     * @return
+     */
     protected OutputStream getOS(){
         try{ return mmSocket.getOutputStream();}
         catch (Exception e){ e.printStackTrace();}
         return null;
     }
 
+    /**
+     * Get the InputStream for receiving bytes from the Arduino.
+     * @return
+     */
     protected InputStream getIS(){
         try{ return mmSocket.getInputStream();}
         catch (Exception e){ e.printStackTrace();}

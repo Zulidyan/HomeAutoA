@@ -140,6 +140,10 @@ public class ThermostatActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Get the latest temperature reading and update the state of the device
+     * @param i The id of the device
+     */
     protected void updateTemperature(int i){
         Log.d("","Trying to update temperature of id"+i);
         try {

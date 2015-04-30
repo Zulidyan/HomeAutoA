@@ -66,6 +66,7 @@ public class MyActivity extends ActionBarActivity {
     }
 
     /** Called when the user clicks the LightsActivity button */
+
     public void openLights(View view) {
         Intent intent = new Intent(this, LightsActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
