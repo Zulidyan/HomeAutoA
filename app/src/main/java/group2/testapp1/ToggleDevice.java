@@ -1,7 +1,6 @@
 package group2.testapp1;
 
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 public class ToggleDevice extends Device {
 
@@ -13,7 +12,6 @@ public class ToggleDevice extends Device {
     public void setState(boolean state){
         this.state = state;
     }
-//    public int getId(){return super.getID();}
 
     public ToggleDevice(String name, int id, BluetoothDevice device){
         super(name, id, device);

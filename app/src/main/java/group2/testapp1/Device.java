@@ -13,13 +13,13 @@ public abstract class Device {
 	private String name;
 	private int deviceID;
     protected BluetoothSocket mmSocket;
-    private BluetoothDevice device;
+    //private BluetoothDevice device;
 
     //constructor
     public Device(String name, int id, BluetoothDevice device){
         this.deviceID = id;
         this.name = name;
-        this.device = device;
+        //this.device = device;
         try {
             this.mmSocket = device.createInsecureRfcommSocketToServiceRecord(
                     UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
@@ -34,6 +34,7 @@ public abstract class Device {
 		return this.name;
 	}
 
+    @SuppressWarnings("unused")
 	public int getID() {
 		return deviceID;
 	}

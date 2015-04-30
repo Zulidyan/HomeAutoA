@@ -16,7 +16,7 @@ import android.view.View;
 public class MyActivity extends ActionBarActivity {
 
 
-    private BluetoothAdapter mBluetoothAdapter;
+//    private BluetoothAdapter mBluetoothAdapter;
 //    public final static String EXTRA_MESSAGE = "wat";
 //    private ListView lv;
 //    private Set<BluetoothDevice> pairedDevices;
@@ -33,7 +33,7 @@ public class MyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, 1);
@@ -135,6 +135,7 @@ public class MyActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /** Called when the user clicks the ThermostatActivity button */
     public void openThermostat(View view){
         Intent intent = new Intent(this, ThermostatActivity.class);
         startActivity(intent);
