@@ -115,6 +115,12 @@ public class LightsActivity extends ActionBarActivity {
                 linear.addView(error);
             }
         }
+        else {
+            TextView error = new TextView(this);
+            error.setText("Please Enable Bluetooth First");
+            error.setTextSize(24);
+            linear.addView(error);
+        }
         sv1.addView(linear);
         setContentView(sv1);
 

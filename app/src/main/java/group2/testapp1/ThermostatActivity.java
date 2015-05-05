@@ -98,6 +98,12 @@ public class ThermostatActivity extends ActionBarActivity {
                 linear.addView(error);
             }
         }
+        else {
+            TextView error = new TextView(this);
+            error.setText("Please Enable Bluetooth First");
+            error.setTextSize(24);
+            linear.addView(error);
+        }
           //linear.addView(l1);
 //        ToggleButton l2 = new ToggleButton(this);
 //        l2.setText("Light 2");
