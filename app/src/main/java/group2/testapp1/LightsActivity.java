@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.InputStream;
@@ -60,7 +61,7 @@ public class LightsActivity extends ActionBarActivity {
                             Log.d("", "Failed to connect to device " + id + " with name " + bt.getName());
                         }
 
-                        ToggleButton button = new ToggleButton(this);
+                        final ToggleButton button = new ToggleButton(this);
                         button.setText(bt.getName());
                         button.setId(id);
                         button.setTextOn(bt.getName() + " On");
@@ -68,7 +69,7 @@ public class LightsActivity extends ActionBarActivity {
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                toggleLight(v.getId());
+                                toggleLight(v.getId(), button);
                             }
                         });
 
@@ -185,7 +186,7 @@ public class LightsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void toggleLight(int i){
+    protected void toggleLight(int i, ToggleButton b){
         Log.d("","Trying to turn on/off with ID "+i);
         try {
             char[] bufferOut = new char[1];
@@ -209,7 +210,10 @@ public class LightsActivity extends ActionBarActivity {
 
             Log.d("","Current state is :"+ tdDeviceArray.get(i).getState());
         } catch (Exception e) {
+            b.setChecked(tdDeviceArray.get(i).getState());
             Log.d("","Failed to toggle light");
+            Toast.makeText(getApplicationContext(),"Error: Failed to toggle " +
+                    tdDeviceArray.get(i).getName(), Toast.LENGTH_SHORT).show();
             //reconnect();
         }
     }
