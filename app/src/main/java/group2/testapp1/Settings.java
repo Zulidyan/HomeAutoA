@@ -65,7 +65,7 @@ public class Settings extends ActionBarActivity {
         //Toast.makeText(getApplicationContext(),"Not Implemented Yet",Toast.LENGTH_SHORT).show();
         if(mBluetoothAdapter.isEnabled()) {
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-            ArrayList tList = new ArrayList();
+            ArrayList <String> tList = new ArrayList<>();
             //ArrayList<BluetoothDevice> tDevice = new ArrayList<>();
 
             for (BluetoothDevice bt : pairedDevices) {
