@@ -13,6 +13,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Settings for Bluetooth connectivity
+ */
 public class Settings extends ActionBarActivity {
     private BluetoothAdapter mBluetoothAdapter;
 //    private Set<BluetoothDevice> pairedDevices;

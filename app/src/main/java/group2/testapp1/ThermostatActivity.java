@@ -20,7 +20,10 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
 
-
+/**
+ * Opens up the Thermostat activity to show a menu that shows the Bluetooth-connected thermostat.
+ * Upon pressing the "Refresh" button, the latest temperature reading will be displayed.
+ */
 public class ThermostatActivity extends ActionBarActivity {
 
     private ArrayList<ThermostatDevice> thermDeviceArray = new ArrayList<>();

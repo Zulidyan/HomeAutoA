@@ -23,6 +23,11 @@ import java.util.Set;
 
 // Created by Matthew on 4/19/15.
 
+/**
+ * Opens up the light activity to show a menu that shows all Bluetooth-connected lights.
+ * Upon flipping the associated ToggleSwitch, the light will be turned on or off and its state
+ * updated accordingly.
+ */
 public class LightsActivity extends ActionBarActivity {
 
     private ArrayList<ToggleDevice> tdDeviceArray = new ArrayList<>();
@@ -109,39 +114,6 @@ public class LightsActivity extends ActionBarActivity {
                 linear.addView(error);
             }
         }
-
-        //create intent
-        //Intent intent = getIntent();
-        //String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);*/
-        //create textView
-//        TextView textView = new TextView(this);
-//        textView.setTextSize(20);
-//        textView.setText("test");
-        //set the view
-
-
-
-
-//        ToggleButton l1 = new ToggleButton(this);
-//        l1.setText("Light 1");
-//        l1.setTextOff("Light 1 Off");
-//        l1.setTextOn("Light 1 On");
-//        l1.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View view){
-//                toggleLight(1);
-//            }
-//        });
-//        linear.addView(l1);
-//        ToggleButton l2 = new ToggleButton(this);
-//        l2.setText("Light 2");
-//        l2.setTextOff("Light 2 Off");
-//        l2.setTextOn("Light 2 On");
-//        l2.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View view){
-//                toggleLight(2);
-//            }
-//        });
-//        linear.addView(l2);
         sv1.addView(linear);
         setContentView(sv1);
 

@@ -12,21 +12,10 @@ import android.view.View;
 //import java.util.ArrayList;
 //import java.util.Set;
 
-
+/**
+ * Main activity
+ */
 public class MyActivity extends ActionBarActivity {
-
-
-//    private BluetoothAdapter mBluetoothAdapter;
-//    public final static String EXTRA_MESSAGE = "wat";
-//    private ListView lv;
-//    private Set<BluetoothDevice> pairedDevices;
-//    private ArrayList<BluetoothDevice> btDeviceArray = new ArrayList<BluetoothDevice>();
-//    private BluetoothSocket mmSocket[];
-//    private ToggleDevice[] tD;
-//
-//    public BluetoothSocket getmmSocket(){
-//        return mmSocket[0];
-//    }
 
 
     @Override

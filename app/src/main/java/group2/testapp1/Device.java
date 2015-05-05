@@ -43,6 +43,10 @@ public abstract class Device {
 		return deviceID;
 	}
 
+    /**
+     * Connect to the Arduino's Bluetooth adapter
+     * @return True if a successful connection is made
+     */
     public boolean connect(){
         try{Log.d("","Trying to connect inside Device");
             mmSocket.connect();
@@ -67,7 +71,7 @@ public abstract class Device {
 
     /**
      * Get the OutputStream for writing bytes to the Arduino.
-     * @return
+     * @return Socket's output stream
      */
     protected OutputStream getOS(){
         try{ return mmSocket.getOutputStream();}
@@ -77,7 +81,7 @@ public abstract class Device {
 
     /**
      * Get the InputStream for receiving bytes from the Arduino.
-     * @return
+     * @return Socket's input stream
      */
     protected InputStream getIS(){
         try{ return mmSocket.getInputStream();}
