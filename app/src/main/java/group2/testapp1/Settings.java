@@ -37,15 +37,15 @@ public class Settings extends ActionBarActivity {
         }
         else Toast.makeText(getApplicationContext(), "Bluetooth Already Enabled", Toast.LENGTH_SHORT).show();
     }
-    public void discoverableBT(View view){
-        if (mBluetoothAdapter.isEnabled()) {
-            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);
-            startActivity(discoverableIntent);
-        }
-        //Toast didn't make sense as it was displayed before accepting discoverable
-        //Toast.makeText(getApplicationContext(),"Discoverable for 30 Seconds",Toast.LENGTH_SHORT).show();
-    }
+//    public void discoverableBT(View view){
+//        if (mBluetoothAdapter.isEnabled()) {
+//            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+//            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);
+//            startActivity(discoverableIntent);
+//        }
+//        //Toast didn't make sense as it was displayed before accepting discoverable
+//        //Toast.makeText(getApplicationContext(),"Discoverable for 30 Seconds",Toast.LENGTH_SHORT).show();
+//    }
     public void disableBT(View view){
         if(mBluetoothAdapter.isEnabled()){
             mBluetoothAdapter.disable();
