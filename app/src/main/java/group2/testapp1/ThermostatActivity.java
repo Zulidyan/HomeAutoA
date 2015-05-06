@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -186,6 +187,12 @@ public class ThermostatActivity extends ActionBarActivity {
             thermDeviceArray.get(i).setTemperature(Float.valueOf(temp));
         } catch (Exception e) {
             Log.d("","Failed to get temperature");
+            Toast.makeText(getApplicationContext(), "Error: Failed to Update Temperature",
+                    Toast.LENGTH_SHORT).show();
+            BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if(!mBluetoothAdapter.isEnabled()){
+                finish();
+            }
         }
     }
 

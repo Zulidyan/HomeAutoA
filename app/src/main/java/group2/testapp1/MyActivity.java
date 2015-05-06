@@ -69,6 +69,15 @@ public class MyActivity extends ActionBarActivity {
         Intent intent = new Intent(this, ThermostatActivity.class);
         startActivity(intent);
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, 1);
+        }
+    }
 //    public void toggleLight(View view){
 //        pairedDevices = mBluetoothAdapter.getBondedDevices();
 //        BluetoothSocket mmSocket;

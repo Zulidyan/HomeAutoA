@@ -18,5 +18,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="reconnect">Reconnect</string>
     <string name="toLights">Open Lights Menu</string>
-    <string name="toThermostat">Open Thermostat menu</string>
+    <string name="toThermostat">Open Thermostat Menu</string>
 </resources>
