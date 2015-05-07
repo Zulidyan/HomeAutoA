@@ -115,6 +115,12 @@ public class LightsActivity extends ActionBarActivity {
                 linear.addView(error);
             }
         }
+        else {
+            TextView error = new TextView(this);
+            error.setText("Please Enable Bluetooth First");
+            error.setTextSize(24);
+            linear.addView(error);
+        }
         sv1.addView(linear);
         setContentView(sv1);
 
@@ -186,7 +192,10 @@ public class LightsActivity extends ActionBarActivity {
             Log.d("","Failed to toggle light");
             Toast.makeText(getApplicationContext(),"Error: Failed to toggle " +
                     tdDeviceArray.get(i).getName(), Toast.LENGTH_SHORT).show();
-            //reconnect();
+            BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            if(!mBluetoothAdapter.isEnabled()) {
+                finish();
+            }
         }
     }
 
